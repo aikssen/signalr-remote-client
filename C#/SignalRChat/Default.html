@@ -28,10 +28,11 @@
             var chat = connection.createHubProxy('chatHub');
 
             // Create a function that the hub can call to broadcast messages.
-            chat.on('broadcastMessage', function (name, message) {
-                console.log(name + ' ' + message);
-                var encodedName = $('<div />').text(name).html();
-                var encodedMsg = $('<div />').text(message).html();
+            chat.on('broadcastMessage', function (response) {
+                console.log(response);
+                console.log(response.UserName + ' ' + response.Message);
+                var encodedName = $('<div />').text(response.UserName).html();
+                var encodedMsg = $('<div />').text(response.Message).html();
                 // Add the message to the page.
                 $('#discussion').append('<li><strong>' + encodedName
                     + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
