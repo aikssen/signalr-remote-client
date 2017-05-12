@@ -38,6 +38,10 @@
                     + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
             });
 
+            chat.on('receiveToken', function (name, token) {
+                console.log(name, token);
+            });
+
 
             // Get the user name and store it to prepend to messages.
             $('#displayname').val(prompt('Enter your name:', ''));
@@ -67,6 +71,15 @@
                 .fail(function () {
                     console.log('Could not connect');
                 });
+
+            // lifetime events
+            connection.connectionSlow(function () {
+                console.log('We are currently experiencing difficulties with the connection.');
+            });
+
+            connection.error(function (error) {
+                console.log('SignalR error: ' + error);
+            });
         });
     </script>
 </body>
